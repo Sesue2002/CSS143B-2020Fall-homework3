@@ -5,6 +5,7 @@ public class MinStack extends ArrayStack<Integer> {
     // can only use Stack interface and ArrayStack from this folder
     // do not use Java Stack
 
+    //i didnt know anything i tried to finish the other two
     public MinStack(int size) {
         // homework
         super(size); // place holder

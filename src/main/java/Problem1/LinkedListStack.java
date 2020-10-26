@@ -7,28 +7,43 @@ public class LinkedListStack<T> implements Stack<T> {
     // do not change member variables
     private LinkedList<T> data;
 
+    //what i tried to do here was create a link list with a stack but i couldnt get the idea
+    //of how to make linked list stack
     public LinkedListStack() {
         // homework
+        LinkedList<T> data = new LinkedList<T>();
     }
 
     @Override
     public boolean push(T val) {
         // homework
-        return false;   // place holder
+        if(data.size() == 0){
+            return false;
+        }
+        data.addLast(val);
+        return true;
     }
 
     @Override
     public T pop() {
         // homework
-        T val = null;   // place holder
-        return val;   // place holder
+        T val = peek();
+        if (val == null) {
+            return null;
+        } else {
+            data.removeLast();
+            return val;
+        }
     }
 
     @Override
     public T peek() {
         // homework
-        T val = null;   // place holder
-        return val;   // place holder
+        if (data.getLast() == null) {
+            return null;
+        } else {
+            return data.getLast();
+        }
     }
 
     @Override
@@ -36,3 +51,4 @@ public class LinkedListStack<T> implements Stack<T> {
         return data.size();
     }
 }
+

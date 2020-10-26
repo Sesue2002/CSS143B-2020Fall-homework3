@@ -1,5 +1,7 @@
 package Problem2;
 
+import java.util.List;
+
 // all functions assume using dummy node
 public class SingleLinkedList {
     // do not add member variables
@@ -10,21 +12,57 @@ public class SingleLinkedList {
         head = new ListNode();  // dummy node
     }
 
-    // copy constructor
+    // copy constructor -> NOW DONE YAY
     public SingleLinkedList(SingleLinkedList list) {
-        // homework
+        //BAD INPUT!
+        if (list == null){
+            return;
+        }
+
+        //THE DUMMY NODE
+        ListNode ptrCopy = new ListNode();
+        head = ptrCopy;
+
+        //USING A PTR TO POINT TO THE ORIGINAL AT 1
+        ListNode ptrOrig = list.head.next;
+
+        //VISUAL INTERPRETATION
+        //ptrCopy -> node(1)
+        while (ptrOrig != null){
+            //PUTTING THE VALUE FROM THE ORIGINAL INTO THE NEXT NODE AFTER THE DUMMY NODE
+            //IN THE NEW COPY LINKEDLIST
+            ptrCopy.next = new ListNode(ptrOrig.val);
+            ptrCopy = ptrCopy.next;
+            ptrOrig = ptrOrig.next;
+        }
+        size = list.size;
     }
 
+    //
     public int removeAll(int valueToRemove) {
         // homework
         // in-place
-        return -1; // place holder
+        return 23;
     }
 
     // reverse the linked list nodes iteratively (no recursion)
     public void reverse() {
         // homework
         // in-place
+        //ListNode dum = new ListNode();
+        //head = dum;
+
+        //didnt know how to implement the dummy node nor how to get the correct value for the current
+        ListNode reverseP = null;
+        ListNode current = head;
+        while (current != null) {
+            ListNode next = null;
+            next = current.next;
+            current.next = reverseP;
+            reverseP = current;
+            current = next;
+        }
+        head = reverseP;
     }
 
     // do not change any function below
