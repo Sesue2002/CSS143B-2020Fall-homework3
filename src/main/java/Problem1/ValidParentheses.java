@@ -4,29 +4,33 @@ public class ValidParentheses {
 
     // Do not change signature (function name, parameters, return type)
     public static boolean isValid(String str) {
-        // homework
-        //this is what i thought would make sense
-        //but since its an array i thought to use the elements but i didn't know how to implement them
-        Stack<Character> arSt = new ArrayStack<>(str.length());
+        if(str == null || str.length() == 0){
+            return true;
+        }
+
+        Stack<Character> s = new LinkedListStack<>();
 
         for(int i = 0; i < str.length(); i++){
-            char cP = str.charAt(0);
-            if (cP == '{' || cP == '(' || cP == '[') {
-                arSt.push(cP);
+            char re = str.charAt(i);
+            Character in = s.peek();
+            if (in == null || !characterMatch(in,re)){
+                s.push(re);
+                continue;
             }
-            if (cP == '}' || cP == ')' || cP == ']') {
-
-                if(arSt.peek(i) != '}' || cP == ')' || cP == ']'){
-                    return false;
-                }
-                char last = arSt.peek();
-                if(cP == '}' || cP == ')' || cP == ']'){
-                    arSt.pop();
-                }
-                else return false;
-            }
-
+            s.pop();
         }
-        return false; // place holder
+        return s.size() == 0;
+    }
+
+    private static boolean characterMatch(char left, char right){
+        switch(left){
+            case '(':
+                return right == ')';
+            case '{':
+                return right == '}';
+            case '[':
+                return right == ']';
+        }
+        return false;
     }
 }

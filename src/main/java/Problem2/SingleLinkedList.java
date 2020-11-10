@@ -9,7 +9,7 @@ public class SingleLinkedList {
     private int size;
 
     public SingleLinkedList() {
-        head = new ListNode();  // dummy node
+        head = new ListNode();
     }
 
     // copy constructor -> NOW DONE YAY
@@ -41,32 +41,37 @@ public class SingleLinkedList {
     //
     public int removeAll(int valueToRemove) {
         // homework
-        // in-place
-        return 23;
+        int count = 0;
+        ListNode p = head;
+        while(p.next != null){
+            if(p.next.val == valueToRemove){
+                p.next = p.next.next;
+                size--;
+                count++;
+                continue;
+            }
+            p = p.next;
+        }
+        return count;
     }
 
     // reverse the linked list nodes iteratively (no recursion)
     public void reverse() {
         // homework
-        // in-place
-        //ListNode dum = new ListNode();
-        //head = dum;
-
-        //didnt know how to implement the dummy node nor how to get the correct value for the current
-        ListNode reverseP = null;
-        ListNode current = head;
-        while (current != null) {
-            ListNode next = null;
-            next = current.next;
-            current.next = reverseP;
-            reverseP = current;
-            current = next;
+        ListNode first = head.next;
+        if(first == null){
+            return;
         }
-        head = reverseP;
+        ListNode swap = first.next;
+        while(swap != null){
+            first.next = swap.next;
+            swap.next = head.next;
+            head.next = swap;
+            swap = first.next;
+        }
     }
 
     // do not change any function below
-
     public SingleLinkedList(int[] data) {
         this();
         if (data == null) {
