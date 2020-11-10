@@ -11,6 +11,17 @@ public class Problem3 {
         // homework
         // !!! must use your ArrayStack or LinkedListStack in problem 1
         // print with the following format. System.out.println() will not pass test.
-        print.println("hello world");   // place holder
+
+        Stack<Integer> stack = new LinkedListStack<>();
+
+        ListNode p = list.next;
+        while (p != null) {
+            stack.push(p.val);
+            p = p.next;
+        }
+
+        while (stack.size() != 0) {
+            print.println(stack.pop());   // place holder
+        }
     }
 }

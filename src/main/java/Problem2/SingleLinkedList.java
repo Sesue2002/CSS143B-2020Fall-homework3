@@ -1,5 +1,7 @@
 package Problem2;
 
+import java.util.List;
+
 // all functions assume using dummy node
 public class SingleLinkedList {
     // do not add member variables
@@ -7,28 +9,69 @@ public class SingleLinkedList {
     private int size;
 
     public SingleLinkedList() {
-        head = new ListNode();  // dummy node
+        head = new ListNode();
     }
 
-    // copy constructor
+    // copy constructor -> NOW DONE YAY
     public SingleLinkedList(SingleLinkedList list) {
-        // homework
+        //BAD INPUT!
+        if (list == null){
+            return;
+        }
+
+        //THE DUMMY NODE
+        ListNode ptrCopy = new ListNode();
+        head = ptrCopy;
+
+        //USING A PTR TO POINT TO THE ORIGINAL AT 1
+        ListNode ptrOrig = list.head.next;
+
+        //VISUAL INTERPRETATION
+        //ptrCopy -> node(1)
+        while (ptrOrig != null){
+            //PUTTING THE VALUE FROM THE ORIGINAL INTO THE NEXT NODE AFTER THE DUMMY NODE
+            //IN THE NEW COPY LINKEDLIST
+            ptrCopy.next = new ListNode(ptrOrig.val);
+            ptrCopy = ptrCopy.next;
+            ptrOrig = ptrOrig.next;
+        }
+        size = list.size;
     }
 
+    //
     public int removeAll(int valueToRemove) {
         // homework
-        // in-place
-        return -1; // place holder
+        int count = 0;
+        ListNode p = head;
+        while(p.next != null){
+            if(p.next.val == valueToRemove){
+                p.next = p.next.next;
+                size--;
+                count++;
+                continue;
+            }
+            p = p.next;
+        }
+        return count;
     }
 
     // reverse the linked list nodes iteratively (no recursion)
     public void reverse() {
         // homework
-        // in-place
+        ListNode first = head.next;
+        if(first == null){
+            return;
+        }
+        ListNode swap = first.next;
+        while(swap != null){
+            first.next = swap.next;
+            swap.next = head.next;
+            head.next = swap;
+            swap = first.next;
+        }
     }
 
     // do not change any function below
-
     public SingleLinkedList(int[] data) {
         this();
         if (data == null) {
